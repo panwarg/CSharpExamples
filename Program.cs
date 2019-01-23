@@ -9,34 +9,32 @@ namespace Palin
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Palindrome());
-
+            Console.WriteLine(GetLongestPalindrome("ABCBAHELLOHOWRACECARAREYOUILOVEUEVOLIIAMAIDOINGGOOD"));
+            Console.WriteLine(Factorial(5));
             var l = Console.ReadLine();
         }
 
-        private static bool Palindrome()
+        private static int Factorial(int v)
         {
-            var input = "ABCBAHELLOHOWRACECARAREYOUILOVEUEVOLIIAMAIDOINGGOOD";
-            var allPals = new List<string>();
+            if (v == 1) return 1;
+
+            return v * Factorial(v-1);
+        }
+
+        private static string GetLongestPalindrome(string input)
+        {
             var longestPal = string.Empty;
             for (int i = 0; i < input.Length; i++)
             {                
                 for(int j = input.Length - i; j > 0; j--)
                 {
                     var str = input.Substring(i, j -1);
-                    if (IsPalin(str))
-                    {
-                        allPals.Add(str);
-                        if (str.Length > longestPal.Length)
-                        {
-                            longestPal = str;
-                        }
-                    }
-                        
+                    if (IsPalin(str) && str.Length > longestPal.Length)
+                        longestPal = str;                        
                 }
-            }
+            }            
 
-            return longestPal != string.Empty;
+            return longestPal;
         }
 
         private static bool IsPalin(string input)
